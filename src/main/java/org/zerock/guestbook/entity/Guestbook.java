@@ -5,7 +5,7 @@ import lombok.*;
 
 // 이 클래스가 entity를 위한 클래스이며, 해당 클래스의 인스턴스들은 JPA가 관리해야 하는 엔티티 객체임을 명시
 @Entity
-// entity는 불변객체로 생성한다.
+// entity는 불변객체로 생성하는 것이 권장 사항.
 @Getter
 @Builder
 @AllArgsConstructor
@@ -38,4 +38,13 @@ public class Guestbook extends BaseEntity{
 
     @Column(length=50, nullable = false)
     private String writer;
+
+    // 일부 필드값을 변경할 수 있게 하면 개발 속도에 이점이 있으므로, 최소한의 setter 설정은 권장함.
+    public void changeTitle(String title){
+        this.title = title;
+    }
+
+    public void changeContent(String content) {
+        this.content = content;
+    }
 }
